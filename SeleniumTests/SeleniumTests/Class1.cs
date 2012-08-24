@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NerdDinnerHelper.cs;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
@@ -17,13 +18,11 @@ namespace SeleniumTests
         {
             using (IWebDriver driver = new FirefoxDriver())
             {
-                driver.Navigate().GoToUrl("http://www.nerddinner.com");
-                var input = driver.FindElement(By.Id("Location"));
-                input.SendKeys("40056");
-                var search = driver.FindElement(By.Id("search"));
-                search.Click();
-                var results = driver.FindElements(By.ClassName("dinnerItem"));
-                // at this point, i don't know what to do, as there's never any search results.   
+                var mainPage = MainPage.NavigateDirectly(driver);
+                mainPage.LocationToSearch.SendKeys("40056");
+                mainPage.SearchButton.Click();
+                var results = mainPage.PopularDinnerSearchResults; 
+
                 Assert.AreEqual(0, results.Count,
                                 "No dinners should be found.. omg, if this works, then its worth it to change the test");
             }
@@ -34,23 +33,28 @@ namespace SeleniumTests
         {
             using (IWebDriver driver = new FirefoxDriver())
             {
-                driver.Navigate().GoToUrl("http://www.nerddinner.com");
+                var mainpage = MainPage.NavigateDirectly(driver);
+                mainpage.ViewAllDinnersLink.Click();
 
-                var searchTextDiv = (from e in driver.FindElements(By.ClassName("search-text"))
-                                     where e.TagName == "div"
-                                     select e).FirstOrDefault();
-                Assert.IsNotNull(searchTextDiv, "Should find search text which has the view all link");
-                var viewAllDinnerslink = searchTextDiv.FindElement(By.TagName("a"));
-                Assert.IsNotNull(viewAllDinnerslink, "should find the view all upcoming dinners link");
-                viewAllDinnerslink.Click();
+                var dinnerPage = new DinnerPage(driver);
+                Assert.Greater(dinnerPage.UpcomingDinners.Count, 0, "There should be at least one dinner out there.. come on guys");
+            }
+        }
 
-                // now on /Dinners page
-                var upcomingDinnersUl = (from e in driver.FindElements(By.ClassName("upcomingdinners"))
-                                          where e.TagName == "ul"
-                                          select e).FirstOrDefault();
-                Assert.IsNotNull(upcomingDinnersUl,"should find a Upcoming Dinners UL");
-                var dinnerLinks = upcomingDinnersUl.FindElements(By.TagName("a")); 
-                Assert.Greater(dinnerLinks.Count, 0, "There should be at least one dinner out there.. come on guys");
+        [Test]
+        public void CanLogInWithGoogle()
+        {
+            using (IWebDriver driver = new FirefoxDriver())
+            {
+                var mainpage = MainPage.NavigateDirectly(driver);
+                mainpage.LogonLink.Click();
+
+                var accountPage = new AccountPage(driver);
+                var googleLink = (from oip in accountPage.OpenIdProviders
+                                  where oip.FunkyUrl == "https://www.google.com/accounts/o8/id"
+                                  select oip).FirstOrDefault();
+                Assert.IsFalse(googleLink.IsLoggedIn, "Because this is a test, should never be logged in"); 
+                googleLink.RootElement.Click();
             }
         }
     }
