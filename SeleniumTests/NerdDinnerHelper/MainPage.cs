@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace NerdDinnerHelper.cs
 {
@@ -55,55 +51,18 @@ namespace NerdDinnerHelper.cs
         {
             get
             {
-                var logindisplaydiv = Driver.FindElement(By.Id("logindisplay"));
-                if (logindisplaydiv == null) throw new NotFoundException("#logindisplay not found");
-                return logindisplaydiv.FindElement(By.TagName("a"));
-            }
-        }
-    }
-
-    public class AccountPage : PageBase
-    {
-        public AccountPage(IWebDriver driver)
-            : base(driver)
-        {
-            Wait.Until(d => d.Title == "Log On");
-        }
-
-        public List<OpenIdProvider> OpenIdProviders
-        {
-            get
-            {
-                var openIdProvidersUl = Driver.FindElement(By.ClassName("OpenIdProviders"));
-                return (from oip in openIdProvidersUl.FindElements(By.ClassName("OPButton"))
-                        select new OpenIdProvider(oip)).ToList();
+                return LoginDisplayDiv.FindElement(By.TagName("a"));
             }
         }
 
-        public class OpenIdProvider
+        public IWebElement LoginDisplayDiv
         {
-            private readonly IWebElement _rootElement;
+            get { return Driver.FindElement(By.Id("logindisplay")); }
+        }
 
-            public OpenIdProvider(IWebElement rootElement)
-            {
-                _rootElement = rootElement;
-            }
-
-            public IWebElement RootElement { get { return _rootElement; } }
-
-            public string FunkyUrl 
-            {
-                get { return RootElement.GetAttribute("id");  }
-            }
-
-            public bool IsLoggedIn
-            {
-                get
-                {
-                    string clars = RootElement.GetAttribute("class");
-                    return clars.Contains("loginSuccess");
-                }
-            }
+        public IWebElement HostDinner
+        {
+            get { return Driver.FindElement(By.LinkText("Host Dinner")); }
         }
     }
 }

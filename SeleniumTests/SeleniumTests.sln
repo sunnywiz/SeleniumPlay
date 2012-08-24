@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{5DDFC275-774A-4B1A-8A5C-E9D87F384961}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdDinner.SeleniumTests", "SeleniumTests\NerdDinner.SeleniumTests.csproj", "{5DDFC275-774A-4B1A-8A5C-E9D87F384961}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdDinnerHelper", "NerdDinnerHelper\NerdDinnerHelper.csproj", "{FCEE17A9-7145-4B16-B9F7-18A81F107A2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdDinner.Helper", "NerdDinnerHelper\NerdDinner.Helper.csproj", "{FCEE17A9-7145-4B16-B9F7-18A81F107A2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
