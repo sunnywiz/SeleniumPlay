@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{5DDFC275-774A-4B1A-8A5C-E9D87F384961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdDinnerHelper", "NerdDinnerHelper\NerdDinnerHelper.csproj", "{FCEE17A9-7145-4B16-B9F7-18A81F107A2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DDFC275-774A-4B1A-8A5C-E9D87F384961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DDFC275-774A-4B1A-8A5C-E9D87F384961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DDFC275-774A-4B1A-8A5C-E9D87F384961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DDFC275-774A-4B1A-8A5C-E9D87F384961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCEE17A9-7145-4B16-B9F7-18A81F107A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCEE17A9-7145-4B16-B9F7-18A81F107A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCEE17A9-7145-4B16-B9F7-18A81F107A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCEE17A9-7145-4B16-B9F7-18A81F107A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
